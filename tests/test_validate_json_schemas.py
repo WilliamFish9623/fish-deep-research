@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """Regression test for skills/*/research/validate_json.py.
 
-The validator accepts EXACTLY ONE schema — the one /research actually emits:
+The validator accepts EXACTLY ONE schema — the one the outline step actually emits:
 
     fields:
       <category>:

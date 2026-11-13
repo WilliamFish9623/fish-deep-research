@@ -1,14 +1,21 @@
 ---
 name: research-add-items
-user-invocable: true
-description: 向现有调研outline补充items（调研对象）。
-allowed-tools: Bash, Read, Write, Glob, WebSearch, Task, AskUserQuestion
+description: 在已有调研提纲中增加、删除或调整调研对象。当用户说「还要加几个对象」「这个对象不需要」「补几家单位/几个案例」时使用。前置条件是当前目录已有 outline.yaml。
 ---
 
 # Research Add Items - 补充调研对象
 
-## 触发方式
-`/research-add-items`
+## 能力要求
+
+需要文件读写与目录检索；可选网页检索与并行子任务。无并行能力时串行执行。
+
+## 何时使用
+
+- 提纲已有，但对象清单不全，需要增补
+- 对象重复或不再相关，需要删除或替换
+- 调研范围变化，需要重新划分对象边界
+
+不适用：提纲尚未生成（先走初步调研）；只想补字段而非补对象（用 research-add-fields）。
 
 ## 执行流程
 
@@ -18,7 +25,7 @@ allowed-tools: Bash, Read, Write, Glob, WebSearch, Task, AskUserQuestion
 ### Step 2: 并行获取补充来源
 同时进行：
 - **A. 询问用户**：需要补充哪些items？有具体名称吗？
-- **B. 询问是否需要Web Search**：是否启动agent搜索更多items？
+- **B. 询问是否需要联网补充**：是否派发检索子任务搜索更多候选对象？
 
 ### Step 3: 合并更新
 - 将新items追加到outline.yaml

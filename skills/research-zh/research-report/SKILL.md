@@ -1,14 +1,21 @@
 ---
 name: research-report
-user-invocable: true
-description: 将deep调研结果汇总为markdown报告，覆盖所有字段，跳过不确定值。
-allowed-tools: Read, Write, Glob, Bash, AskUserQuestion
+description: 把逐项深挖得到的结构化JSON汇总成一份Markdown报告，覆盖全部字段、跳过不确定值、生成可跳转目录。当用户要求「汇总成报告」「把结果整理成一份材料」「出一版完整稿」时使用。前置条件是results目录下已有逐项JSON。
 ---
 
 # Research Report - 汇总报告
 
-## 触发方式
-`/research-report`
+## 能力要求
+
+需要文件读写与目录检索；建议具备命令行执行能力，用于生成并运行汇总脚本。不能执行代码时，按同一套规则手工汇总，产物一致，仅在交付时说明降级原因。
+
+## 何时使用
+
+- 逐项调研已全部或大部分完成，需要合成一份可读材料
+- 需要按统一结构输出目录、正文与来源
+- 需要把零散的JSON整理成可交付的Markdown
+
+不适用：调研尚未开始或结果文件缺失（先回深挖阶段）；只需要其中一两个对象的结论（直接读对应JSON）。
 
 ## 执行流程
 
@@ -24,11 +31,11 @@ allowed-tools: Read, Write, Glob, Bash, AskUserQuestion
 - valuation
 - release_date
 
-使用AskUserQuestion询问用户：
+向用户询问（提一个带选项的问题，若无选项控件则列出候选让用户挑选）：
 - 目录中除了item名称外，还需要显示哪些字段？
 - 提供动态选项列表（基于实际JSON中存在的字段）
 
-### Step 3: 生成Python转换脚本
+### Step 3: 生成汇总脚本
 在 `{topic}/` 目录下生成 `generate_report.py`，脚本要求：
 - 读取output_dir下所有JSON
 - 读取fields.yaml获取字段结构
@@ -37,6 +44,8 @@ allowed-tools: Read, Write, Glob, Bash, AskUserQuestion
 - 跳过uncertain数组中列出的字段
 - 生成markdown报告格式：目录（带锚点跳转+用户选择的摘要字段）+ 详细内容（按字段分类）
 - 保存到 `{topic}/report.md`
+
+若运行环境不能生成或执行脚本，直接按上述规则手工汇总，并在报告末尾注明「本次为手工汇总」。
 
 **目录格式要求**：
 - 必须包含每一个item
@@ -89,5 +98,5 @@ CATEGORY_MAPPING = {
 运行 `python {topic}/generate_report.py`
 
 ## 输出
-- `{topic}/generate_report.py` - 转换脚本
+- `{topic}/generate_report.py` - 汇总脚本
 - `{topic}/report.md` - 汇总报告

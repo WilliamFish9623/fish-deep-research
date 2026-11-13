@@ -1,14 +1,21 @@
 ---
 name: research-deep
-user-invocable: true
-description: 读取调研outline，为每个item启动独立agent进行深度调研。禁用task output。
-allowed-tools: Bash, Read, Write, Glob, WebSearch, Task
+description: 读取调研提纲，为每个调研对象派发独立检索子任务，逐项填充字段并输出结构化JSON。当用户要求「开始深挖」「按提纲逐项查」「接着上次没查完的继续」时使用。前置条件是当前目录已存在 outline.yaml 与 fields.yaml。
 ---
 
 # Research Deep - 深度调研
 
-## 触发方式
-`/research-deep`
+## 能力要求
+
+需要四类能力：文件读写、网页检索、命令行执行（运行字段校验脚本）、批量或并行子任务。没有并行能力时逐个串行，产物结构不变。子任务完成与否以输出文件是否存在判定，不依赖运行日志或任务面板。
+
+## 何时使用
+
+- 用户已确认 outline.yaml 与 fields.yaml，要求开始逐项调研
+- 上一轮中断，需要续跑未完成的对象
+- 只想补齐某几个对象的字段，而非重跑全部
+
+不适用：提纲或字段尚未确定（先回初步调研阶段）；只需要一篇文献的精读（直接检索并阅读即可）。
 
 ## 执行流程
 
@@ -21,8 +28,8 @@ allowed-tools: Bash, Read, Write, Glob, WebSearch, Task
 
 ### Step 3: 分批执行
 - 按batch_size分批（完成一批需要得到用户同意才可进行下一批）
-- 每个agent负责items_per_agent个项目
-- 启动web-search-agent（后台并行，禁用task output）
+- 每个子任务负责items_per_agent个项目
+- 按下方提示词派发检索子任务（有并行能力则并行，否则串行）
 
 **参数获取**：
 - `{topic}`: outline.yaml中的topic字段
@@ -30,6 +37,7 @@ allowed-tools: Bash, Read, Write, Glob, WebSearch, Task
 - `{item_related_info}`: item的完整yaml内容（name + category + description等）
 - `{output_dir}`: outline.yaml中execution.output_dir（默认./results）
 - `{fields_path}`: {topic}/fields.yaml的绝对路径
+- `{validator_path}`: 字段校验脚本路径，即本仓库 `skills/research-zh/research/validate_json.py` 的绝对路径；不便引用绝对路径时，复制到当前目录后用相对路径
 - `{output_path}`: {output_dir}/{item_name_slug}.json的绝对路径（slugify处理item_name：空格替换为_，移除特殊字符）
 
 **硬约束**：以下prompt必须严格复述，仅替换{xxx}中的变量，禁止改写结构或措辞。
@@ -53,7 +61,7 @@ prompt = f"""## 任务
 
 ## 验证
 完成JSON输出后，运行验证脚本确保字段完整覆盖：
-python ~/.claude/skills/research/validate_json.py -f {fields_path} -j {output_path}
+python {validator_path} -f {fields_path} -j {output_path}
 验证通过后才算完成任务。
 """
 ```
@@ -79,7 +87,7 @@ description: Microsoft/GitHub开发，首个主流AI编程助手，市场份额�
 
 ## 验证
 完成JSON输出后，运行验证脚本确保字段完整覆盖：
-python ~/.claude/skills/research/validate_json.py -f {project_dir}/fields.yaml -j {project_dir}/results/GitHub_Copilot.json
+python {validator_path} -f {project_dir}/fields.yaml -j {project_dir}/results/GitHub_Copilot.json
 验证通过后才算完成任务。
 ```
 
@@ -94,7 +102,8 @@ python ~/.claude/skills/research/validate_json.py -f {project_dir}/fields.yaml -
 - 失败/不确定标记的items
 - 输出目录
 
-## Agent配置
-- 后台执行: 是
-- Task Output: 禁用（agent完成时有明确输出文件）
-- 断点续传: 是
+## 执行约定
+- 执行方式: 并行或串行均可，结果等价
+- 完成判定: 输出文件存在且通过字段校验
+- 断点续传: 支持，按已存在的结果文件跳过
+- 降级说明: 串行执行时在交付末尾注明「本次为串行执行，耗时较长，结果结构一致」

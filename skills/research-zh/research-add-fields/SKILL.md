@@ -1,14 +1,21 @@
 ---
 name: research-add-fields
-user-invocable: true
-description: 向现有调研outline补充字段定义。
-allowed-tools: Bash, Read, Write, Glob, WebSearch, Task, AskUserQuestion
+description: 在已有调研提纲中补充或调整字段定义、维度与详细程度。当用户说「再加几个字段」「这个维度拆细一点」「字段不够用」时使用。前置条件是当前目录已有 fields.yaml。
 ---
 
 # Research Add Fields - 补充调研字段
 
-## 触发方式
-`/research-add-fields`
+## 能力要求
+
+需要文件读写与目录检索；可选网页检索与并行子任务。无并行能力时串行执行。
+
+## 何时使用
+
+- 现有字段覆盖不到新问题，需要增补维度
+- 字段描述含糊，需要写清口径与取值方式
+- 需要调整详细程度，把某一类字段从「简要」提到「详细」
+
+不适用：字段表尚未生成（先走初步调研）；只想加对象而非加字段（用 research-add-items）。
 
 ## 执行流程
 
@@ -18,7 +25,7 @@ allowed-tools: Bash, Read, Write, Glob, WebSearch, Task, AskUserQuestion
 ### Step 2: 获取补充来源
 询问用户选择：
 - **A. 用户直接输入**：用户提供字段名称和描述
-- **B. Web Search搜索**：启动web-search-agent搜索该领域常用字段
+- **B. 联网参考**：派发检索子任务，查找该领域常用的字段与指标口径
 
 ### Step 3: 展示并确认
 - 展示建议的新字段列表
