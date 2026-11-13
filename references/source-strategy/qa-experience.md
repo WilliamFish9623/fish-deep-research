@@ -26,3 +26,7 @@
 ## 搜索源
 - **Stack Overflow** and other Stack Exchange sites - technical Q&A
 - **Technical forums** and discussion boards - community wisdom
+
+## 权重
+
+问答与经验帖只作线索，不作结论依据。引用时注明平台与时间，并尽量找到当事人或原始记录。

@@ -25,3 +25,7 @@
 - Look for performance benchmarks and user experiences
 - Identify trade-offs and decision factors
 - Consider scalability, maintenance, and learning curve
+
+## 权重
+
+通用网页属发现层，用于找线索、找案例、找反例。凡是进入结论的事实，回溯到原始发布主体，不引用二手转述。

@@ -30,7 +30,7 @@
 - [x] 删除 `agents/web-search-opencode.md`，仅 OpenCode 读取
 - [x] 删除 `scripts/install-codex.sh`，作用是往 Codex 配置写入 `multi_agent`、`suppress_unstable_features_warning` 等开关
 - [x] 删除 `tests/test_install_codex.sh`，验证上述安装逻辑
-- [ ] 重写 `README.zh.md` 与 `README.md` 的安装章节，移除 Claude Code、OpenCode、Codex 三段式安装与 `OPENCODE_ENABLE_EXA` 说明
+- [x] 重写 README：合并为中英文单份中文说明，改为通用安装步骤与能力要求，删除平台专属安装段；`README.zh.md` 已合并删除
 
 验收：删除后 `skills/` 下只剩 `research-zh` 一个目录，五张工序卡仍完整。
 
@@ -83,9 +83,9 @@
 - [x] `scripts/validate_json.py` 的 `CATEGORY_MAPPING` 已由八个 AI 产品分类替换为五类：基本信息、制度与依据、做法与机制、成效与证据、争议与局限（随脚本迁移一并完成）
 - [x] `references/04-report.md` 的分类双向映射已同步替换，与脚本一致
 - [x] `templates/outline.example.yaml` 与 `fields.example.yaml` 已改为医院统战工作品牌场景，字段数 11，校验通过
-- [ ] 检索来源配额写入 `references/source-strategy/`：政策原文与统计公报合计不低于四成，媒体与自媒体不高于两成，且不得单独支撑结论
-- [ ] 报告模板对齐既有文风规范：直角引号、无加粗、段落论证优先、文末参考资料
-- [ ] 新建 `CHANGELOG.md`，记录本次改造的范围与理由
+- [x] 配额已写入 `references/source-strategy/policy-statistics.md`，其余三份模块补权重说明
+- [x] `references/04-report.md` 新增「文风与格式」节，对齐直角引号、无加粗、段落论证、文末参考资料
+- [x] 新建 `CHANGELOG.md`，按删除、去绑定、合并、本地化、保留五类记录
 
 ## 六、阶段 E：验收
 

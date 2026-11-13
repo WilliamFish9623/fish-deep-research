@@ -26,3 +26,7 @@
 - Note impact factors, h-index, and citation counts for relevance assessment
 - Search for conference proceedings, journals, and workshop papers
 - Identify funding agencies and research grants for context
+
+## 权重
+
+学术论文在本技能中属三级来源，用于了解研究现状、方法参照与争议线索。涉及制度规定与统计数字时，回到政策原文与统计公报复核，不以论文转述为准。
