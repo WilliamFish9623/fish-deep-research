@@ -1,0 +1,40 @@
+fields:
+  基本信息:
+    - name: 单位名称
+      description: 以官网或正式发文全称为准，不用简称
+      detail_level: 极简
+    - name: 品牌名称
+      description: 品牌正式名称，保留原有标点与间隔号
+      detail_level: 极简
+  制度与依据:
+    - name: 发文主体
+      description: 党委、统战部门或群团组织，写全称
+      detail_level: 简要
+    - name: 文号与时间
+      description: 有文号写文号，无文号写会议通过时间与会议名称
+      detail_level: 简要
+    - name: 制度依据
+      description: 所依据的上级文件名称与条款，注明层级
+      detail_level: 简要
+  做法与机制:
+    - name: 主要做法
+      description: 三到五条，动词开头，只写做什么，不写成效
+      detail_level: 详细
+    - name: 运行机制
+      description: 谁牵头、谁参与、多久一次、经费来源与保障方式
+      detail_level: 详细
+    - name: 覆盖对象
+      description: 服务或团结的对象类别与规模，注明统计口径
+      detail_level: 简要
+  成效与证据:
+    - name: 可核验成效
+      description: 有数字或第三方表述，注明来源与统计时间
+      detail_level: 详细
+    - name: 外部评价
+      description: 上级表彰、媒体报道或同行引用，注明发布主体
+      detail_level: 简要
+  争议与局限:
+    - name: 已知问题
+      description: 公开材料提到的困难、批评或未覆盖人群
+      detail_level: 简要
+uncertain: []

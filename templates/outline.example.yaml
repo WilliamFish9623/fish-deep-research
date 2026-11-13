@@ -1,0 +1,15 @@
+topic: 市级医院统战工作品牌案例对照
+items:
+  - name: 案例一 同心健康行
+    category: 综合医院
+    description: 以义诊与健康科普为载体的统战品牌，需核实起始年份、发文依据与覆盖人群
+  - name: 案例二 知联讲堂
+    category: 区级医院
+    description: 依托知联会开展的讲座品牌，重点看组织架构、排期机制与经费来源
+  - name: 案例三 民族情健康驿站
+    category: 社区卫生服务中心
+    description: 面向少数民族群众的健康服务点，重点看与街道统战部门的协作方式
+execution:
+  batch_size: 2
+  items_per_agent: 1
+  output_dir: ./results

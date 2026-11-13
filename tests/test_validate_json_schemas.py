@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-"""Regression test for skills/*/research/validate_json.py.
+"""Regression test for scripts/validate_json.py.
 
 The validator accepts EXACTLY ONE schema — the one the outline step actually emits:
 
@@ -23,7 +23,7 @@ import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-COPIES = sorted(ROOT.glob("skills/*/research/validate_json.py"))
+COPIES = sorted(ROOT.glob("scripts/validate_json.py"))
 
 tmp = Path(tempfile.mkdtemp())
 # The one accepted schema: fields:{<category>:[{name, detail_level}]} with NO `required` markers.
@@ -66,9 +66,9 @@ def check(label, cond):
         fails.append(label)
 
 
-assert COPIES, "no validate_json.py copies found under skills/*/research/"
+assert COPIES, "scripts/validate_json.py not found"
 for i, path in enumerate(COPIES):
-    tag = path.relative_to(ROOT).parts[1]  # e.g. research-en
+    tag = "validator"
     m = load(path, i)
 
     # 1. The one accepted schema parses all 4 fields; all required (no markers).

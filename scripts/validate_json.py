@@ -10,13 +10,10 @@ import yaml
 
 CATEGORY_MAPPING = {
     "基本信息": ["basic_info", "基本信息"],
-    "技术特性": ["technical_features", "technical_characteristics", "技术特性"],
-    "性能指标": ["performance_metrics", "performance", "性能指标"],
-    "里程碑意义": ["milestone_significance", "milestones", "里程碑意义"],
-    "商业信息": ["business_info", "commercial_info", "商业信息"],
-    "竞争与生态": ["competition_ecosystem", "competition", "竞争与生态"],
-    "历史沿革": ["history", "历史沿革"],
-    "市场定位": ["market_positioning", "market", "市场定位"],
+    "制度与依据": ["institution_basis", "policy_basis", "制度与依据"],
+    "做法与机制": ["practice_mechanism", "mechanism", "做法与机制"],
+    "成效与证据": ["outcomes_evidence", "outcomes", "成效与证据"],
+    "争议与局限": ["debates_limitations", "limitations", "争议与局限"],
 }
 
 _SKIP_KEYS = {"_source_file", "uncertain"}

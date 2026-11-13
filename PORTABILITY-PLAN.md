@@ -23,13 +23,13 @@
 
 ## 二、阶段 A：删除（不触碰方法，最安全）
 
-- [ ] 删除 `skills/research-en/`，英文版工序卡，与中文版内容等价，保留会造成触发冲突
-- [ ] 删除 `skills/research-codex-en/`
-- [ ] 删除 `skills/research-codex-zh/`
-- [ ] 删除 `agents-codex/`，含 `web-researcher.toml` 与五份模块副本，仅 Codex 读取
-- [ ] 删除 `agents/web-search-opencode.md`，仅 OpenCode 读取
-- [ ] 删除 `scripts/install-codex.sh`，作用是往 Codex 配置写入 `multi_agent`、`suppress_unstable_features_warning` 等开关
-- [ ] 删除 `tests/test_install_codex.sh`，验证上述安装逻辑
+- [x] 删除 `skills/research-en/`，英文版工序卡，与中文版内容等价，保留会造成触发冲突
+- [x] 删除 `skills/research-codex-en/`
+- [x] 删除 `skills/research-codex-zh/`
+- [x] 删除 `agents-codex/`，含 `web-researcher.toml` 与五份模块副本，仅 Codex 读取
+- [x] 删除 `agents/web-search-opencode.md`，仅 OpenCode 读取
+- [x] 删除 `scripts/install-codex.sh`，作用是往 Codex 配置写入 `multi_agent`、`suppress_unstable_features_warning` 等开关
+- [x] 删除 `tests/test_install_codex.sh`，验证上述安装逻辑
 - [ ] 重写 `README.zh.md` 与 `README.md` 的安装章节，移除 Claude Code、OpenCode、Codex 三段式安装与 `OPENCODE_ENABLE_EXA` 说明
 
 验收：删除后 `skills/` 下只剩 `research-zh` 一个目录，五张工序卡仍完整。
@@ -57,32 +57,32 @@
 
 另需全局替换的三类措辞：
 
-- [ ] 「启动 web-search-agent（后台并行）」改为「若平台支持并行子任务，按下述提示词并行；否则串行执行，结果等价」
-- [ ] 「agent 配置：后台执行、Task Output、断点续传」改为「执行约定：产物落盘、按文件判完成、可断点续传」
-- [ ] 所有「禁用 task output」改为「不依赖运行日志，以输出文件是否存在判定完成」
+- [x] 「启动 web-search-agent（后台并行）」改为「若平台支持并行子任务，按下述提示词并行；否则串行执行，结果等价」
+- [x] 「agent 配置：后台执行、Task Output、断点续传」改为「执行约定：产物落盘、按文件判完成、可断点续传」
+- [x] 所有「禁用 task output」改为「不依赖运行日志，以输出文件是否存在判定完成」
 
 验收：`grep -rIn -E "allowed-tools|user-invocable|AskUserQuestion|~/\\.claude|model: opus" skills agents tests` 无输出。
 
 ## 四、阶段 C：合并为单入口
 
-- [ ] 新建根级 `SKILL.md`，只写五件事：何时使用、五阶段流程、每阶段产物、质量门禁、能力降级规则
-- [ ] 新建 `references/01-scope.md`，收拢原 research 的立项与问题确认部分
-- [ ] 新建 `references/02-outline.md`，收拢 outline.yaml 与 fields.yaml 的设计规则
-- [ ] 新建 `references/03-deep.md`，收拢分批并行、断点续传、字段填充与不确定标注
-- [ ] 新建 `references/04-report.md`，收拢汇总规则、目录格式与不确定值跳过
-- [ ] 新建 `references/05-agent-prompt.md`，由 `agents/web-search-agent.md` 改写：删除模型指定与目录依赖，保留查询生成、来源优先级、质量自检
-- [ ] 将 `agents/web-search-modules/` 迁为 `references/source-strategy/`：保留 `academic-papers.md`、`general-web.md`；`chinese-tech.md` 改为「政策与统计来源」；`github-debug.md` 与 `stackoverflow.md` 合并为「问答与经验来源」
-- [ ] 将 `skills/research-zh/research/validate_json.py` 迁至 `scripts/validate_json.py`，路径改为相对调用
-- [ ] 新建 `templates/outline.example.yaml` 与 `templates/fields.example.yaml`，从原 SKILL.md 示例提取
-- [ ] 原五个技能目录归档删除，历史留在 Git 提交中
+- [x] 新建根级 `SKILL.md`，只写五件事：何时使用、五阶段流程、每阶段产物、质量门禁、能力降级规则
+- [x] 新建 `references/01-scope.md`，收拢原 research 的立项与问题确认部分
+- [x] 新建 `references/02-outline.md`，收拢 outline.yaml 与 fields.yaml 的设计规则
+- [x] 新建 `references/03-deep.md`，收拢分批并行、断点续传、字段填充与不确定标注
+- [x] 新建 `references/04-report.md`，收拢汇总规则、目录格式与不确定值跳过
+- [x] 新建 `references/05-agent-prompt.md`，由 `agents/web-search-agent.md` 改写：删除模型指定与目录依赖，保留查询生成、来源优先级、质量自检
+- [x] 将 `agents/web-search-modules/` 迁为 `references/source-strategy/`：保留 `academic-papers.md`、`general-web.md`；`chinese-tech.md` 改为「政策与统计来源」；`github-debug.md` 与 `stackoverflow.md` 合并为「问答与经验来源」
+- [x] 将 `skills/research-zh/research/validate_json.py` 迁至 `scripts/validate_json.py`，路径改为相对调用
+- [x] 新建 `templates/outline.example.yaml` 与 `templates/fields.example.yaml`，从原 SKILL.md 示例提取
+- [x] 原五个技能目录归档删除，历史留在 Git 提交中
 
 验收：新入口的 description 能覆盖「深度调研、综述、多对象对照、政策梳理、资料汇总」五类说法，且不与既有技能描述重复。
 
 ## 五、阶段 D：本地化
 
-- [ ] `scripts/validate_json.py` 第 11-20 行 `CATEGORY_MAPPING` 的八个 AI 产品分类，替换为医院管理与政策研究分类：发文主体、文号与效力、时间与沿革、核心条款、执行口径、数据与指标、同行做法、争议与局限
-- [ ] `research-report` 中生成脚本的分类双向映射同步替换，避免中英键名对不上
-- [ ] 字段示例改为卫生管理与党建研究场景，例如「上海市公立医院党委办公室运行机制」或「市级统战工作品牌案例对照」
+- [x] `scripts/validate_json.py` 的 `CATEGORY_MAPPING` 已由八个 AI 产品分类替换为五类：基本信息、制度与依据、做法与机制、成效与证据、争议与局限（随脚本迁移一并完成）
+- [x] `references/04-report.md` 的分类双向映射已同步替换，与脚本一致
+- [x] `templates/outline.example.yaml` 与 `fields.example.yaml` 已改为医院统战工作品牌场景，字段数 11，校验通过
 - [ ] 检索来源配额写入 `references/source-strategy/`：政策原文与统计公报合计不低于四成，媒体与自媒体不高于两成，且不得单独支撑结论
 - [ ] 报告模板对齐既有文风规范：直角引号、无加粗、段落论证优先、文末参考资料
 - [ ] 新建 `CHANGELOG.md`，记录本次改造的范围与理由

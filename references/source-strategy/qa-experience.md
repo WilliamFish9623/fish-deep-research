@@ -16,3 +16,13 @@
 - Identify if the issue is version-specific
 - Search for both the library name + error and more general descriptions
 - Check closed issues for resolution patterns
+
+---
+
+## 技术问答（原 Stack Overflow 模块）
+
+**触发场景**: 编程问答、代码实现、API用法
+
+## 搜索源
+- **Stack Overflow** and other Stack Exchange sites - technical Q&A
+- **Technical forums** and discussion boards - community wisdom
