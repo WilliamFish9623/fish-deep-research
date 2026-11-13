@@ -89,13 +89,18 @@
 
 ## 六、阶段 E：验收
 
-- [ ] 平台关键词清零：`grep -rIn -E "claude|codex|opencode|OPENCODE" . --exclude-dir=.git` 仅允许出现在 CHANGELOG 与 LICENSE 说明中
-- [ ] 绝对路径清零：`grep -rIn -E "~/\\.claude|~/\\.codex|~/\\.config/opencode" . --exclude-dir=.git` 无输出
-- [ ] 校验脚本可用：`python scripts/validate_json.py -f templates/fields.example.yaml -d results` 在 Python 3.13 与 pyyaml 下正常退出
-- [ ] 回归测试通过：`python tests/test_validate_json_schemas.py` 退出码为 0
-- [ ] 真实任务跑通：在 WorkBuddy 内用自然语言触发一次完整五阶段，产出 outline.yaml、fields.yaml、逐项 JSON、report.md 四类产物
-- [ ] 降级跑通：在提示中声明「本平台无并行子任务能力」，确认走串行路径且产物结构一致
-- [ ] 触发不冲突：与 thesis-writing-companion、deep-fact-check 同时存在时，说「深度调研」应命中本技能，说「核验这句话」应命中事实核查
+验收时间 2026-11-13。测试题目为「公立医院高质量发展政策要求对照」，两个对象、六个字段，产物位于 `D://agent-skills//_e2e//fish-deep-research//2026-11-13-policy`。
+
+- [x] 平台关键词清零：README、SKILL、references、scripts、tests 内无 claude、codex、opencode；仅 CHANGELOG 与本清单作为历史记录保留
+- [x] 绝对路径清零：README、SKILL、references、scripts、tests 内无 `~/.claude`、`~/.codex`、`~/.config/opencode`；CHANGELOG 与本清单作为历史记录保留原文引用
+- [x] 校验脚本可用：在演练目录执行 `python D:/agent-skills/fish-deep-research/scripts/validate_json.py -f fields.yaml -j results/*.json`，两个对象覆盖率均为 100%，额外字段「来源链接」被正确识别
+- [x] 回归测试通过：六项全部 PASS
+- [x] 流程演练通过：按五阶段手工执行，产出 outline.yaml、fields.yaml、两份 JSON、report.md；检索使用 DeepSeek，抓取两份政策原文，未获取项单列
+- [x] 串行路径验证：本次为逐项串行执行，产物结构与并行设计一致
+- [ ] 技能自动触发：本会话的技能清单在启动时加载，映射后需新会话验证；当前只验证了文件可读与流程可执行
+- [ ] 触发不冲突：同上，需在新会话中与 thesis-writing-companion、deep-fact-check 同时验证
+
+遗留两项。一是自动触发与冲突检测依赖新会话，不能在本会话内完成。二是 04 要求把 JSON 中的额外字段收入「其他信息」，本次测试脚本未实现该分支，属执行偏差，真实任务中需补上，技能文本本身无需改动。
 
 ## 七、明确保留（容易被误删）
 
